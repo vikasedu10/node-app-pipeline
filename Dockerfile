@@ -1,4 +1,4 @@
-FROM openjdk:11-jre-alpine
+FROM openjdk:latest
 
 EXPOSE 8080
 
