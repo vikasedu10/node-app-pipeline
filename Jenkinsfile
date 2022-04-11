@@ -43,8 +43,8 @@ pipeline {
                 message "Select the env to deploy to for latest release"
                 ok "Input recorded"
                 parameters {
-                    choices(name: 'ENV', choices: ['dev', 'rpt', 'staging', 'prod'], description: '')
-                    choices(name: 'SERVERS', choices: ['Child servers', 'north-east region 1', '127.0.0.1:3121', 'Master node'], description: '')
+                    choice(name: 'ENV', choices: ['dev', 'rpt', 'staging', 'prod'], description: '')
+                    choice(name: 'SERVERS', choices: ['Child servers', 'north-east region 1', '127.0.0.1:3121', 'Master node'], description: '')
                 }
             }
             steps {
