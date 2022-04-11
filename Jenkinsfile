@@ -41,7 +41,7 @@ pipeline {
         stage("deploy") {
             steps {
                 script {
-                    env.ENV = message: "Select the env to deploy to for latest release", ok: "Input recorded", parameters: [choice(name: 'ENV', choices: ['dev', 'rpt', 'staging', 'prod'], description: ''), choice(name: 'SERVERS', choices: ['Child servers', 'north-east region 1', '127.0.0.1:3121', 'Master node'])]
+                    env.ENV = input message: "Select the env to deploy to for latest release", ok: "Input recorded", parameters: [choice(name: 'ENV', choices: ['dev', 'rpt', 'staging', 'prod'], description: '')]
                     gv.deployApp()
                     echo "Deploying to ${ENV} environment"
                 }
