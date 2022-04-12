@@ -31,7 +31,6 @@ pipeline {
         stage("deploying to ec2") {
             steps {
                 script {
-                    gv.deployApp()
                     echo "Deploying application to rpt ec2 environment"
                 }
             }
