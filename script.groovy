@@ -1,14 +1,19 @@
-def buildApp() {
-    echo "Building your application"
+def buildJar() {
+    echo "Building & testing application using Maven"
+    sh 'mvn package'
 }
 
-def testApp() {
-    echo "Testing the application"
+def buildDockerImage() {
+    echo "Building docker image"
+    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'PASS', usernameVariable: 'USERNAME')]) {
+        sh "docker build -t vikas1412/java-maven-app:1.1 ."
+        sh "echo $PASS | docker login -u $USERNAME --password-stdin"
+        sh "docker push vikas1412/java-maven-app:1.1"
+    }
 }
 
 def deployApp() {
-    echo "Deploying your application"
-    echo "Application version to be deployed: ${VERSION}"
+    echo "Deploying application to rpt ec2 environment"
 }
 
 return this
