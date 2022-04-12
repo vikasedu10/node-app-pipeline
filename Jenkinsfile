@@ -21,7 +21,7 @@ pipeline {
                     echo "Building docker image"
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'PASS', usernameVariable: 'USERNAME')]) {
                         sh "docker build -t vikas1412/java-maven-app:1.1 ."
-                        sh "echo $PASS | docker login -u $USERNAME --password-stdin"
+                        sh "docker login -u $USERNAME $PASS"
                         sh "docker push vikas1412/java-maven-app:1.1"
                     }
                 }
