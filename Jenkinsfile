@@ -1,3 +1,5 @@
+def gv
+
 pipeline {
     agent any
 
@@ -6,11 +8,17 @@ pipeline {
     }
 
     stages {
+        stage("init") {
+            steps {
+                script {
+                    gv = load "script.groovy"
+                }
+            }
+        }
         stage("Building app") {
             steps {
                 script {
-                    echo "Building application using Maven"
-                    sh 'mvn package'
+                    gv.buildJar()
                 }
             }
         }
@@ -18,12 +26,7 @@ pipeline {
         stage("Building Docker image") {
             steps {
                 script {
-                    echo "Building docker image"
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'PASS', usernameVariable: 'USERNAME')]) {
-                        sh "docker build -t vikas1412/java-maven-app:1.1 ."
-                        sh "echo $PASS | docker login -u $USERNAME --password-stdin"
-                        sh "docker push vikas1412/java-maven-app:1.1"
-                    }
+                    gv.buildDockerImage()
                 }
             }
         }
@@ -31,7 +34,7 @@ pipeline {
         stage("deploying to ec2") {
             steps {
                 script {
-                    echo "Deploying application to rpt ec2 environment"
+                    gv.deployApp()
                 }
             }
         }
