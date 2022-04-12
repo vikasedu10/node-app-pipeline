@@ -19,15 +19,15 @@ pipeline {
             steps {
                 script {
                     echo "Building docker image"
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'PASS', usernameVariable: 'UESRNAME')]) {
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'PASS', usernameVariable: 'USERNAME')]) {
                         sh "docker build -t vikas1412/java-maven-app:1.1 ."
-                        sh "echo $PASS | docker login -u $UESRNAME --password-stdin"
+                        sh "echo $PASS | docker login -u $USERNAME --password-stdin"
                         sh "docker push vikas1412/java-maven-app:1.1"
                     }
                 }
             }
         }
-
+    
         stage("deploying to ec2") {
             steps {
                 script {
