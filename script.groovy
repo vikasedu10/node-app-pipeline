@@ -1,5 +1,9 @@
+def testApp() {
+    echo "Testing application using test cases written in java"
+}
+
 def buildJar() {
-    echo "Building & testing application using Maven"
+    echo "Building application using Maven"
     sh 'mvn package'
 }
 

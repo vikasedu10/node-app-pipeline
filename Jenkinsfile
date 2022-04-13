@@ -15,7 +15,19 @@ pipeline {
                 }
             }
         }
+        stage("Testing app") {
+            steps {
+                script {
+                    gv.testApp()
+                }
+            }
+        }
         stage("Building app") {
+            when {
+                expression {
+                    BRANCH_NAME == 'master'
+                }
+            }
             steps {
                 script {
                     gv.buildJar()
@@ -24,6 +36,11 @@ pipeline {
         }
 
         stage("Building Docker image") {
+            when {
+                expression {
+                    BRANCH_NAME == 'master'
+                }
+            }
             steps {
                 script {
                     gv.buildDockerImage()
@@ -32,6 +49,11 @@ pipeline {
         }
     
         stage("deploying to ec2") {
+            when {
+                expression {
+                    BRANCH_NAME == 'master'
+                }
+            }
             steps {
                 script {
                     gv.deployApp()
