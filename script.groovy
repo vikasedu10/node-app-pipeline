@@ -1,9 +1,9 @@
-def buildApp() {
-    echo "Building your application"
+def testApp() {
+    echo "Testing the application on '$BRANCH_NAME' branch"
 }
 
-def testApp() {
-    echo "Testing the application"
+def buildApp() {
+    echo "Building your application"
 }
 
 def deployApp() {
