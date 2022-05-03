@@ -1,0 +1,19 @@
+{
+  "name": "hello-world-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/vikasedu10/java-maven-demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/vikasedu10/java-maven-demo/issues"
+  },
+  "homepage": "https://gitlab.com/vikasedu10/java-maven-demo#readme"
+}

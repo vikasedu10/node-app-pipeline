@@ -1,0 +1,29 @@
+version: '3'
+services:
+  node-app:
+    image: 430528729342.dkr.ecr.us-east-2.amazonaws.com/node-app:1.1
+    ports:
+      - 3000:3000
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=vikas
+    volumes:
+      - mongodb-volume:/data/db
+  mongo-express:
+    image: mongo-express
+    # restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=vikas
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    restart: unless-stopped
+
+volumes:
+  mongodb-volume:
+    driver: local
